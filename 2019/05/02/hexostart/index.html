@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>QByteArray类的理解与类型转换 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="QByteArray 类QByteArray 类型可简单看作元素是 byte 的数组，可用于存储原始字节（包括’\0’）和传统的8位 ‘\0’ 端接字符串。使用 QByteArray 比使用 const char * 更方便。 QByteArray 主要适用于存储原始二进制数据，并且对内存保护要求很高时。（例如，使用嵌入式 Linux 的 Qt） QByteArray 的初始化 在定义时直接赋值，">
+  <meta name="description" content="QByteArray 类QByteArray 类型可简单看作元素是 byte 的数组，可用于存储原始字节（包括’\0’）和传统的8位 ‘\0’ 端接字符串。使用 QByteArray 比使用 const char * 更方便。 QByteArray 主要适用于存储原始二进制数据，并且对内存保护要求很高时。（例如，使用嵌入式 Linux 的 Qt）">
 <meta name="keywords" content="QT,日常">
 <meta property="og:type" content="article">
 <meta property="og:title" content="QByteArray类的理解与类型转换">
 <meta property="og:url" content="http://yoursite.com/2019/05/02/hexostart/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="QByteArray 类QByteArray 类型可简单看作元素是 byte 的数组，可用于存储原始字节（包括’\0’）和传统的8位 ‘\0’ 端接字符串。使用 QByteArray 比使用 const char * 更方便。 QByteArray 主要适用于存储原始二进制数据，并且对内存保护要求很高时。（例如，使用嵌入式 Linux 的 Qt） QByteArray 的初始化 在定义时直接赋值，">
+<meta property="og:description" content="QByteArray 类QByteArray 类型可简单看作元素是 byte 的数组，可用于存储原始字节（包括’\0’）和传统的8位 ‘\0’ 端接字符串。使用 QByteArray 比使用 const char * 更方便。 QByteArray 主要适用于存储原始二进制数据，并且对内存保护要求很高时。（例如，使用嵌入式 Linux 的 Qt）">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-09T06:15:56.952Z">
+<meta property="og:updated_time" content="2019-05-09T06:20:51.807Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="QByteArray类的理解与类型转换">
-<meta name="twitter:description" content="QByteArray 类QByteArray 类型可简单看作元素是 byte 的数组，可用于存储原始字节（包括’\0’）和传统的8位 ‘\0’ 端接字符串。使用 QByteArray 比使用 const char * 更方便。 QByteArray 主要适用于存储原始二进制数据，并且对内存保护要求很高时。（例如，使用嵌入式 Linux 的 Qt） QByteArray 的初始化 在定义时直接赋值，">
+<meta name="twitter:description" content="QByteArray 类QByteArray 类型可简单看作元素是 byte 的数组，可用于存储原始字节（包括’\0’）和传统的8位 ‘\0’ 端接字符串。使用 QByteArray 比使用 const char * 更方便。 QByteArray 主要适用于存储原始二进制数据，并且对内存保护要求很高时。（例如，使用嵌入式 Linux 的 Qt）">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -177,6 +177,7 @@
       
         <h2 id="QByteArray-类"><a href="#QByteArray-类" class="headerlink" title="QByteArray 类"></a>QByteArray 类</h2><p>QByteArray 类型可简单看作元素是 byte 的数组，可用于存储原始字节（包括’\0’）和传统的8位 ‘\0’ 端接字符串。使用 QByteArray 比使用 const char * 更方便。</p>
 <p>QByteArray 主要适用于存储原始二进制数据，并且对内存保护要求很高时。（例如，使用嵌入式 Linux 的 Qt）</p>
+<a id="more"></a>
 <h3 id="QByteArray-的初始化"><a href="#QByteArray-的初始化" class="headerlink" title="QByteArray 的初始化"></a>QByteArray 的初始化</h3><ol>
 <li>在定义时直接赋值，由 const char * 将其传递给其构造函数。</li>
 </ol>
