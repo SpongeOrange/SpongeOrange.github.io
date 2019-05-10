@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>QByteArray类的理解与类型转换 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="QByteArray 类QByteArray 类型可简单看作元素是 byte 的数组，可用于存储原始字节（包括’\0’）和传统的8位 ‘\0’ 端接字符串。使用 QByteArray 比使用 const char * 更方便。 QByteArray 主要适用于存储原始二进制数据，并且对内存保护要求很高时。（例如，使用嵌入式 Linux 的 Qt）">
+  <meta name="description" content="QByteArray 类QByteArray 类型可简单看作元素是 byte 的数组，可用于存储原始字节（包括 ‘\0’ ）和传统的8位 ‘\0’ 端接字符串。使用 QByteArray 比使用 const char * 更方便。 QByteArray 主要适用于存储原始二进制数据，并且对内存保护要求很高时。（例如，使用嵌入式 Linux 的 Qt ）">
 <meta name="keywords" content="QT,日常">
 <meta property="og:type" content="article">
 <meta property="og:title" content="QByteArray类的理解与类型转换">
 <meta property="og:url" content="http://yoursite.com/2019/05/02/hexostart/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="QByteArray 类QByteArray 类型可简单看作元素是 byte 的数组，可用于存储原始字节（包括’\0’）和传统的8位 ‘\0’ 端接字符串。使用 QByteArray 比使用 const char * 更方便。 QByteArray 主要适用于存储原始二进制数据，并且对内存保护要求很高时。（例如，使用嵌入式 Linux 的 Qt）">
+<meta property="og:description" content="QByteArray 类QByteArray 类型可简单看作元素是 byte 的数组，可用于存储原始字节（包括 ‘\0’ ）和传统的8位 ‘\0’ 端接字符串。使用 QByteArray 比使用 const char * 更方便。 QByteArray 主要适用于存储原始二进制数据，并且对内存保护要求很高时。（例如，使用嵌入式 Linux 的 Qt ）">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-09T06:20:51.807Z">
+<meta property="og:updated_time" content="2019-05-10T00:35:59.148Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="QByteArray类的理解与类型转换">
-<meta name="twitter:description" content="QByteArray 类QByteArray 类型可简单看作元素是 byte 的数组，可用于存储原始字节（包括’\0’）和传统的8位 ‘\0’ 端接字符串。使用 QByteArray 比使用 const char * 更方便。 QByteArray 主要适用于存储原始二进制数据，并且对内存保护要求很高时。（例如，使用嵌入式 Linux 的 Qt）">
+<meta name="twitter:description" content="QByteArray 类QByteArray 类型可简单看作元素是 byte 的数组，可用于存储原始字节（包括 ‘\0’ ）和传统的8位 ‘\0’ 端接字符串。使用 QByteArray 比使用 const char * 更方便。 QByteArray 主要适用于存储原始二进制数据，并且对内存保护要求很高时。（例如，使用嵌入式 Linux 的 Qt ）">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -175,8 +175,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="QByteArray-类"><a href="#QByteArray-类" class="headerlink" title="QByteArray 类"></a>QByteArray 类</h2><p>QByteArray 类型可简单看作元素是 byte 的数组，可用于存储原始字节（包括’\0’）和传统的8位 ‘\0’ 端接字符串。使用 QByteArray 比使用 const char * 更方便。</p>
-<p>QByteArray 主要适用于存储原始二进制数据，并且对内存保护要求很高时。（例如，使用嵌入式 Linux 的 Qt）</p>
+        <h2 id="QByteArray-类"><a href="#QByteArray-类" class="headerlink" title="QByteArray 类"></a>QByteArray 类</h2><p>QByteArray 类型可简单看作元素是 byte 的数组，可用于存储原始字节（包括 ‘\0’ ）和传统的8位 ‘\0’ 端接字符串。使用 QByteArray 比使用 const char * 更方便。</p>
+<p>QByteArray 主要适用于存储原始二进制数据，并且对内存保护要求很高时。（例如，使用嵌入式 Linux 的 Qt ）</p>
 <a id="more"></a>
 <h3 id="QByteArray-的初始化"><a href="#QByteArray-的初始化" class="headerlink" title="QByteArray 的初始化"></a>QByteArray 的初始化</h3><ol>
 <li>在定义时直接赋值，由 const char * 将其传递给其构造函数。</li>
@@ -186,7 +186,7 @@
 <li>利用 resize() 函数设置 QByteArray 的大小，并初始化数组中的每个字节。</li>
 </ol>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">QByteArray ba;</span><br><span class="line">ba.reszize(<span class="number">4</span>);</span><br><span class="line"></span><br><span class="line">ba[<span class="number">0</span>] = <span class="number">0x3c</span>;</span><br><span class="line">ba[<span class="number">1</span>] = <span class="number">0xb8</span>;</span><br><span class="line">ba[<span class="number">2</span>] = <span class="number">0x64</span>;</span><br><span class="line">ba[<span class="number">3</span>] = <span class="number">0x18</span>;</span><br></pre></td></tr></table></figure>
-<p>QByteArray可以嵌入’\0’字节, size() 函数总是返回整个数组的大小，包括嵌入的 ‘\0’ 字节，但不包括 QByteArray 添加的终止’\0’。</p>
+<p>QByteArray可以嵌入 ‘\0’ 字节,  size() 函数总是返回整个数组的大小，包括嵌入的 ‘\0’ 字节，但不包括 QByteArray 添加的终止 ‘\0’。</p>
 <h2 id="QByteArray-的常用成员函数"><a href="#QByteArray-的常用成员函数" class="headerlink" title="QByteArray 的常用成员函数"></a>QByteArray 的常用成员函数</h2><p>目前主要用到的成员函数如下：</p>
 <ol>
 <li><p>char QByteArray :: at ( int i ) const</p>
@@ -199,7 +199,7 @@
 <li><p>char * QByteArray::data ()</p>
 <p> 返回指向数组存储数据的指针。该指针可用于访问和修改组成数组的字节。具体访问字节数组中的某一个，采用 ba.data()[0]–&gt; 访问第0个</p>
  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">QByteArray <span class="title">ba</span><span class="params">(<span class="string">"Hello"</span>)</span></span>;</span><br><span class="line"><span class="keyword">char</span> *data = ba.data();<span class="comment">//返回一个指向字节数组ba的数据指针，指向第一个字符</span></span><br><span class="line">qDebug() &lt;&lt; ba.data();<span class="comment">//打印整个字符</span></span><br><span class="line"><span class="keyword">while</span>(*data)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"["</span> &lt;&lt; *data &lt;&lt; <span class="string">"]"</span> <span class="built_in">endl</span>;</span><br><span class="line">    ++data;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> 得到结果 [H],[e],[l],[l],[o]。</p>
+<p> 得到结果 [H], [e], [l], [l], [o]。</p>
 </li>
 <li><p>double QByteArray::toDouble(bool *ok = Q_NULLPTR) const</p>
 <p> float QByteArray::toFloat(bool *ok = Q_NULLPTR) const</p>
