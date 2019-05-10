@@ -1,45 +1,51 @@
-extends ./_partial/layout.pug
-block content
-  include ./_partial/post_header.pug
-  .article-content(style='max-width:'+ theme.content_width +'px')
-    if page.photos && page.photos.length
-      div
-        each photo in page.photos
-          a.article-gallery-img.fancybox(href=photo)
-            img(src=photo)
-    | !{page.content}
-  .article-meta(style='max-width:'+ theme.content_width +'px')
-    if page.tags && page.tags.length
-      .tags
-        i.icon.icon-tag
-        | !{list_tags(page.tags)}
-    if page.tags && page.categories.length
-      .categories
-        i.icon.icon-category
-        | !{list_categories(page.categories)}
-  if theme.duoshuo.enable
-    .article-comment(style='max-width:'+ theme.content_width +'px')
-      #ds-thread.ds-thread(data-thread-key=page._id, data-title=page.title, data-url=config.url + url_for(page.path), site-name=theme.duoshuo.siteName)
-      script.
-        var siteName = document.getElementById('ds-thread').getAttribute('site-name');
-        var duoshuoQuery = {short_name: siteName};
-        (function() {
-          var ds = document.createElement('script');
-          ds.type = 'text/javascript';ds.async = true;
-          ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-          ds.charset = 'UTF-8';
-          (document.getElementsByTagName('head')[0] 
-          || document.getElementsByTagName('body')[0]).appendChild(ds);
-        })();
-  ul.navication
-    li.home
-      a(href="/")
-        i.icon.icon-home
-    if page.prev && page.prev.path
-      li
-        a(href=url_for(page.prev.path))
-          i.icon.icon-arror-left
-    if page.next && page.next.path
-      li
-        a(href=url_for(page.next.path))
-          i.icon.icon-arror-right
+<!DOCTYPE html><html lang="zh-cn"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"><meta name="format-detection" content="telephone=no"><meta name="format-detection" content="email=no"><meta name="description"><meta name="keywords" content="Hexo, Gruntjs, Nodejs, Reactjs, Vuejs"><title>QByteArray类的理解与类型转换 - Hexo</title><link rel="stylesheet" href="/css/main_style.min.css"><link rel="icon" href="/favicon.ico"></head><body><input id="navi" type="checkbox"><ul class="main-navication"><li><a href="/"><span>Home</span></a></li><li><a href="https://github.com"><span>Github</span></a></li><li><a href="https://www.v2ex.com/"><span>V2EX</span></a></li></ul><div class="wrapper" id="wrap"><div class="post-header"><label class="navi-button light" for="navi">MENU</label><img class="background" src="http://callfiles.ueibo.com/hexo-theme-laughing/post_background.jpg"><div class="post-title"><h1 class="title">QByteArray类的理解与类型转换</h1><ul class="meta"><li><i class="icon icon-author"></i>SpongeOrange</li><li><i class="icon icon-clock"></i>10 Minutes</li><li><i class="icon icon-calendar"></i>May 2, 2019</li></ul></div></div><div class="article-content" style="max-width:800px"><h2 id="QByteArray-类"><a href="#QByteArray-类" class="headerlink" title="QByteArray 类"></a>QByteArray 类</h2><p>QByteArray 类型可简单看作元素是 byte 的数组，可用于存储原始字节（包括 ‘\0’ ）和传统的8位 ‘\0’ 端接字符串。使用 QByteArray 比使用 const char * 更方便。</p>
+<p>QByteArray 主要适用于存储原始二进制数据，并且对内存保护要求很高时。（例如，使用嵌入式 Linux 的 Qt ）</p>
+<a id="more"></a>
+<h3 id="QByteArray-的初始化"><a href="#QByteArray-的初始化" class="headerlink" title="QByteArray 的初始化"></a>QByteArray 的初始化</h3><ol>
+<li>在定义时直接赋值，由 const char * 将其传递给其构造函数。</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">QByteArray <span class="title">ba</span><span class="params">(<span class="string">"Hello"</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>利用 resize() 函数设置 QByteArray 的大小，并初始化数组中的每个字节。</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">QByteArray ba;</span><br><span class="line">ba.reszize(<span class="number">4</span>);</span><br><span class="line"></span><br><span class="line">ba[<span class="number">0</span>] = <span class="number">0x3c</span>;</span><br><span class="line">ba[<span class="number">1</span>] = <span class="number">0xb8</span>;</span><br><span class="line">ba[<span class="number">2</span>] = <span class="number">0x64</span>;</span><br><span class="line">ba[<span class="number">3</span>] = <span class="number">0x18</span>;</span><br></pre></td></tr></table></figure>
+<p>QByteArray可以嵌入 ‘\0’ 字节,  size() 函数总是返回整个数组的大小，包括嵌入的 ‘\0’ 字节，但不包括 QByteArray 添加的终止 ‘\0’。</p>
+<h2 id="QByteArray-的常用成员函数"><a href="#QByteArray-的常用成员函数" class="headerlink" title="QByteArray 的常用成员函数"></a>QByteArray 的常用成员函数</h2><p>目前主要用到的成员函数如下：</p>
+<ol>
+<li><p>char QByteArray :: at ( int i ) const</p>
+<p> 返回索引位置为 $i$ 元素的值，且 $i$ 必须为比特数组中的有效索引值，即 0 &lt;= $i$ &lt; size()。</p>
+<p> 如果只需要对 QByteArray 中的元素进行读取，用 at() 函数可以比 operator[] () 更快，因为它不会导致深层拷贝发生。</p>
+</li>
+<li><p>QByteRef QByteArray::operator[] ( int i )</p>
+<p> 返回索引位置为 $i$ 元素的值，且值为可修改的。</p>
+</li>
+<li><p>char * QByteArray::data ()</p>
+<p> 返回指向数组存储数据的指针。该指针可用于访问和修改组成数组的字节。具体访问字节数组中的某一个，采用 ba.data()[0]–&gt; 访问第0个</p>
+ <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">QByteArray <span class="title">ba</span><span class="params">(<span class="string">"Hello"</span>)</span></span>;</span><br><span class="line"><span class="keyword">char</span> *data = ba.data();<span class="comment">//返回一个指向字节数组ba的数据指针，指向第一个字符</span></span><br><span class="line">qDebug() &lt;&lt; ba.data();<span class="comment">//打印整个字符</span></span><br><span class="line"><span class="keyword">while</span>(*data)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"["</span> &lt;&lt; *data &lt;&lt; <span class="string">"]"</span> <span class="built_in">endl</span>;</span><br><span class="line">    ++data;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 得到结果 [H], [e], [l], [l], [o]。</p>
+</li>
+<li><p>double QByteArray::toDouble(bool *ok = Q_NULLPTR) const</p>
+<p> float QByteArray::toFloat(bool *ok = Q_NULLPTR) const</p>
+<p> int QByteArray::toInt(bool *ok = Q_NULLPTR, int base = 10) const</p>
+<p> 返回转换为 double / float / int 类型的字节数组，这里仅为举例说明，几乎所有 QByteArray 转换其他类型均可尝试。</p>
+ <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">QByteArray <span class="title">string</span><span class="params">(<span class="string">"1234.56"</span>)</span></span>;</span><br><span class="line"><span class="keyword">double</span> a = <span class="built_in">string</span>.toDouble();</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="QByteArray-转换为-long-int"><a href="#QByteArray-转换为-long-int" class="headerlink" title="QByteArray 转换为 long int"></a>QByteArray 转换为 long int</h2><p>编程使用的是 Linux C，首先考虑使用 C 语言中的强制类型转换，即</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">QByteArray ba;</span><br><span class="line">ba.reszize(<span class="number">4</span>);</span><br><span class="line"></span><br><span class="line">ba[<span class="number">0</span>] = <span class="number">0x3c</span>;</span><br><span class="line">ba[<span class="number">1</span>] = <span class="number">0xb8</span>;</span><br><span class="line">ba[<span class="number">2</span>] = <span class="number">0x64</span>;</span><br><span class="line">ba[<span class="number">3</span>] = <span class="number">0x18</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> <span class="keyword">int</span> a1 = (<span class="keyword">long</span>)ba[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">int</span> a2 = (<span class="keyword">long</span>)ba[<span class="number">1</span>];</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">int</span> a3 = (<span class="keyword">long</span>)ba[<span class="number">2</span>];</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">int</span> a4 = (<span class="keyword">long</span>)ba[<span class="number">3</span>];</span><br></pre></td></tr></table></figure>
+<p>考虑到强制类型转换可能带来的精度损失问题，使数据变得不正确，因此通过先将 QByteArray 数组中的值分别转换为 QString 类型，然后用 toLong() 函数将其转为二进制长整型。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">QByteArray ba;</span><br><span class="line">ba.reszize(<span class="number">4</span>);</span><br><span class="line"></span><br><span class="line">ba[<span class="number">0</span>] = <span class="number">0x3c</span>;</span><br><span class="line">ba[<span class="number">1</span>] = <span class="number">0xb8</span>;</span><br><span class="line">ba[<span class="number">2</span>] = <span class="number">0x64</span>;</span><br><span class="line">ba[<span class="number">3</span>] = <span class="number">0x18</span>;</span><br><span class="line"></span><br><span class="line">QString a1 = <span class="string">""</span>;</span><br><span class="line">a1.append(floatData.at(<span class="number">0</span>));</span><br><span class="line"><span class="comment">//a1.append(floatData.data()[0]);</span></span><br><span class="line">QString a2 = <span class="string">""</span>;</span><br><span class="line">a2.append(floatData.at(<span class="number">1</span>));</span><br><span class="line"><span class="comment">//a2.append(floatData.data()[1]);</span></span><br><span class="line">QString a3 = <span class="string">""</span>;</span><br><span class="line">a3.append(floatData.at(<span class="number">2</span>));</span><br><span class="line"><span class="comment">//a3.append(floatData.data()[2]);</span></span><br><span class="line">QString a4 = <span class="string">""</span>;</span><br><span class="line">a4.append(floatData.at(<span class="number">3</span>));</span><br><span class="line"><span class="comment">//a4.append(floatData.data()[3]);</span></span><br><span class="line"></span><br><span class="line">realbyte0 = a4.toLong(&amp;ok, <span class="number">2</span>);</span><br><span class="line">realbyte1 = a3.toLong(&amp;ok, <span class="number">2</span>);</span><br><span class="line">realbyte2 = a2.toLong(&amp;ok, <span class="number">2</span>);</span><br><span class="line">realbyte3 = a1.toLong(&amp;ok, <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://blog.csdn.net/Aidam_Bo/article/details/85778012" target="_blank" rel="noopener">Qt总结之十五：QByteArray详解</a></p>
+</div><div class="article-meta" style="max-width:800px"><div class="tags"><i class="icon icon-tag"></i><ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/QT/">QT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日常/">日常</a><span class="tag-list-count">1</span></li></ul></div></div><div class="article-comment" style="max-width:800px"><div class="ds-thread" id="ds-thread" data-thread-key="cjvhcjg070002fwwh3uvn1k9s" data-title="QByteArray类的理解与类型转换" data-url="http://yoursite.com/2019/05/02/hexostart/" site-name="ueibo"></div><script>var siteName = document.getElementById('ds-thread').getAttribute('site-name');
+var duoshuoQuery = {short_name: siteName};
+(function() {
+  var ds = document.createElement('script');
+  ds.type = 'text/javascript';ds.async = true;
+  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+  ds.charset = 'UTF-8';
+  (document.getElementsByTagName('head')[0] 
+  || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();</script></div><ul class="navication"><li class="home"><a href="/"><i class="icon icon-home"></i></a></li><li><a href="/2019/05/09/201905-MarkDown/"><i class="icon icon-arror-left"></i></a></li><li><a href="/2019/05/02/hello-world/"><i class="icon icon-arror-right"></i></a></li></ul><div class="page-footer"><div class="top"><ul class="social"><li><a href="https://github.com/BoizZ" title="Github" target="_blank"><i class="icon icon-github"></i></a></li><li><a href="https://weibo.com/heqibang" title="Weibo" target="_blank"><i class="icon icon-weibo"></i></a></li><li><a href="https://www.segmentfault.com/u/bon" title="SegmentFault" target="_blank"><i class="icon icon-segmentfault"></i></a></li></ul></div><div class="bottom"><p class="copyright">© 2019 Hexo<br><small>POWER BY <a href="https://hexo.io" target="_blank">HEXO</a></small><small>, THEME BY <a href="https://github.com/BoizZ/hexo-theme-laughing" target="_blank">LAUGHING</a></small></p></div></div></div><script>var wrap = document.getElementById('wrap');
+window.onload = function () {
+  wrap.className += ' done';
+}</script></body></html>
