@@ -29,7 +29,7 @@
 <meta property="og:site_name">
 <meta property="og:description" content="hexo 常见操作及命令 更改主题  百度搜索 hexo 主题，在 hexo 主题网站中挑选自己喜欢的主题，点进去找到该主题的 github 地址并下载。将下载的文件解压到 \hexo\themes 目录下，并在项目的配置文件 _config.yml 中将主题（theme）修改为刚刚下载的主题名。然后执行如下步骤： (1) hexo clean 清理项目（清除缓存文件（db.json） 和已生成的">
 <meta property="og:locale" content="ch-CN">
-<meta property="og:updated_time" content="2019-06-17T09:00:05.841Z">
+<meta property="og:updated_time" content="2019-06-18T07:34:35.469Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用 hexo 写博客及常用 markdown 语法">
 <meta name="twitter:description" content="hexo 常见操作及命令 更改主题  百度搜索 hexo 主题，在 hexo 主题网站中挑选自己喜欢的主题，点进去找到该主题的 github 地址并下载。将下载的文件解压到 \hexo\themes 目录下，并在项目的配置文件 _config.yml 中将主题（theme）修改为刚刚下载的主题名。然后执行如下步骤： (1) hexo clean 清理项目（清除缓存文件（db.json） 和已生成的">
@@ -170,7 +170,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#hexo-常见操作及命令"><span class="post-toc-number">1.</span> <span class="post-toc-text">hexo 常见操作及命令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#markdown-常用语法"><span class="post-toc-number">2.</span> <span class="post-toc-text">markdown 常用语法</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#hexo-常见操作及命令"><span class="post-toc-number">1.</span> <span class="post-toc-text">hexo 常见操作及命令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#markdown-常用语法（陆续更新）"><span class="post-toc-number">2.</span> <span class="post-toc-text">markdown 常用语法（陆续更新）</span></a></li></ol>
         </nav>
     </aside>
 
@@ -207,14 +207,38 @@
 </ol>
 <p>在 \hexo 根目录下文件夹窗口任意空白处点击鼠标右键选择 ”Git Bash Here“，在弹出的命令行窗口中输入命令。</p>
 <ul>
-<li>hexo n 文件名：新建一篇文章，n 也可以用 new 代替，这里的文件名不用加后缀（.md）。</li>
-<li>hexo g：生成静态文件，这里的 g 表示 generate。</li>
-<li><p>hexo d：静态文件生成后部署网站，这里的 d 表示 deploy。通常我们在对博客进行修改后这两个命令都需要执行，那么可以执行 hexo d -g 这一条命令来代替以上两条。注：hexo g -d 也是阔以滴。</p>
+<li><p>hexo init：新建一个网站。</p>
 </li>
-<li><p>hexo publish 文件名：发表草稿。</p>
+<li><p>hexo n 文件名：新建一篇文章，n 也可以用 new 代替，这里的文件名不用加后缀（.md）。</p>
 </li>
+<li>hexo s：启动服务器，在本地查看内容。</li>
+<li>hexo g：生成静态页面，这里的 g 表示 generate。</li>
+<li>hexo d：静态文件生成后部署网站，这里的 d 表示 deploy。通常我们在对博客进行修改后这两个命令都需要执行，那么可以执行 hexo d -g 这一条命令来代替以上两条。注：用 hexo g -d 也是阔以滴。</li>
 </ul>
-<h2 id="markdown-常用语法"><a href="#markdown-常用语法" class="headerlink" title="markdown 常用语法"></a>markdown 常用语法</h2>
+<h2 id="markdown-常用语法（陆续更新）"><a href="#markdown-常用语法（陆续更新）" class="headerlink" title="markdown 常用语法（陆续更新）"></a>markdown 常用语法（陆续更新）</h2><p>虽然用 typora 编辑 markdown 文件更便捷直观，但有些格式问题在部署到网站之前都很难发现，相比来说还是用 vs code 编写格式更规范一点<del>（但是我懒）</del>。下面介绍一些经常用到的 markdown 语法：</p>
+<ol>
+<li>文章开头添加目录</li>
+</ol>
+<p>在 md 中几级标题就在标题内容前加几个 #（然后跟一个空格），在一级标题后空一行输入 [TOC] 再空一行即可，例如：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># markdown使用</span></span><br><span class="line"></span><br><span class="line">[TOC]</span><br><span class="line"></span><br><span class="line"><span class="section">## 常用语法规范</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>插入链接</li>
+</ol>
+<p>插入链接的形式如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">链接文字</span>](<span class="link">链接网址</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">You can use [<span class="string">google</span>](<span class="link">http://www.google.com.hk/</span>) to search.</span><br></pre></td></tr></table></figure>
+<p>显示结果：You can use <a href="http://www.google.com.hk/" target="_blank" rel="noopener">google</a> to search.</p>
+<p>除了这种形式之外，md 还支持以比较简短的自动链接形式来处理网址和电子邮箱，只要是用 &lt; &gt; 包起来，md 就会自动把它转成链接。，例如：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;http://www.google.com.hk/&gt;</span><br><span class="line">&lt;address@example.com&gt;</span><br></pre></td></tr></table></figure>
+<p>显示结果：</p>
+<p><a href="http://www.google.com.hk/" target="_blank" rel="noopener">http://www.google.com.hk/</a><br><a href="mailto:&#x61;&#x64;&#x64;&#114;&#x65;&#x73;&#x73;&#x40;&#101;&#x78;&#x61;&#109;&#x70;&#108;&#101;&#46;&#x63;&#x6f;&#x6d;" target="_blank" rel="noopener">&#x61;&#x64;&#x64;&#114;&#x65;&#x73;&#x73;&#x40;&#101;&#x78;&#x61;&#109;&#x70;&#108;&#101;&#46;&#x63;&#x6f;&#x6d;</a></p>
+<ol start="3">
+<li>插入图片</li>
+</ol>
+<p>添加图片最基础的格式是：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![<span class="string">图片标签</span>](<span class="link">图片地址</span>)</span><br></pre></td></tr></table></figure>
+<p>若要插入本地图片，需要先将图片复制到 /hexo/source/_posts/ 目录下，最好新建一个文件夹专门存放图片文件。图片地址可以使用相对地址。</p>
+
         </div>
 
         <blockquote class="post-copyright">
@@ -222,7 +246,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-06-17T09:00:05.841Z" itemprop="dateUpdated">2019-06-17 17:00:05</time>
+    Last updated: <time datetime="2019-06-18T07:34:35.469Z" itemprop="dateUpdated">2019-06-18 15:34:35</time>
 </span><br>
 
 
